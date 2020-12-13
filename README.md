@@ -108,7 +108,24 @@ We followed following steps for corresponding database setups,
         sudo mv hadoop-$RELEASE/ /usr/local/hadoop
         
         
+* Set HADOOP_HOME and add directory with Hadoop binaries to your $PATH.
 
+        sudo vim  /etc/profile.d/hadoop_java.sh
+        
+ * Add following lines to the existing file.
+ 
+        export HADOOP_HOME=/usr/local/hadoop
+        export HADOOP_HDFS_HOME=$HADOOP_HOME
+        export HADOOP_MAPRED_HOME=$HADOOP_HOME
+        export YARN_HOME=$HADOOP_HOME
+        export HADOOP_COMMON_HOME=$HADOOP_HOME
+        export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+        export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+
+* set PATH variable 
+        
+        source /etc/profile.d/hadoop_java.sh
+        
 * Configuring Hadoop while adding properties to following files core-site.xml, hdfs-site.xml, mapred-site.xml and yarn-site.xml  and validate the configuration by * starting and stopping dfs and yarn.
 * Downloading and installing HBase 2.2.5 in Standalone mode.
 * Edit configuration file hbase-site.xml for operating it in single mode.
