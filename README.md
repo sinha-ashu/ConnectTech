@@ -127,6 +127,16 @@ We followed following steps for corresponding database setups,
         source /etc/profile.d/hadoop_java.sh
         
 * Configuring Hadoop while adding properties to following files core-site.xml, hdfs-site.xml, mapred-site.xml and yarn-site.xml  and validate the configuration by * starting and stopping dfs and yarn.
+
+
+* First edit JAVA_HOME in shell script hadoop-env.sh:
+
+        sudo vim /usr/local/hadoop/etc/hadoop/hadoop-env.sh 
+        
+* Set JAVA_HOME - Line 54 as below 
+
+        export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+
 * Downloading and installing HBase 2.2.5 in Standalone mode.
 * Edit configuration file hbase-site.xml for operating it in single mode.
 * Start dfs, yarn and hbase to check the status.
@@ -151,6 +161,7 @@ We followed following steps for corresponding database setups,
         
         sudo systemctl start mongod
         sudo systemctl status mongod    
+        
 #### Cassandra Install and Setup:
 
 * Deploy the instance with the operating system as Ubuntu 18.04 LTS and update all the packages.
