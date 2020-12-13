@@ -212,6 +212,7 @@ We followed following steps for corresponding database setups,
         
         sudo mv hbase-$VER/ /usr/local/HBase/
         
+
  * Add following lines to the existing file.
  
         * sudo vim /etc/profile.d/hadoop_java.sh
@@ -249,6 +250,7 @@ We followed following steps for corresponding database setups,
         sudo mkdir -p /hadoop/zookeeper
         
         sudo chown -R hadoop:hadoop /hadoop/
+
 
 
 * Edit configuration file hbase-site.xml for operating it in single mode.
@@ -300,12 +302,41 @@ We followed following steps for corresponding database setups,
 
 * Deploy the instance with the operating system as Ubuntu 18.04 LTS and update all the packages.
 * Download and Install Java.
-* Create a new file and add the Apache repository of Cassandra to the file /etc/yum.repos.d/cassandra.repo (as the root user).
+        
+        sudo yum install java-1.8.0-openjdk-devel
+
+* Create a new file and add the Apache repository of Cassandra to the file /etc/yum.repos.d/cassandra.repo (as the root user). 
+
+        sudo su
+        touch /etc/yum.repos.d/cassandra.repo
+        cd /etc/yum.repos.d/
+        vim cassandra.repo
+        
+        File Content : 
+        
+        [cassandra]
+        name=Apache Cassandra
+        baseurl=https://downloads.apache.org/cassandra/redhat/40x/
+        gpgcheck=1
+        repo_gpgcheck=1
+        gpgkey=https://downloads.apache.org/cassandra/KEYS
+
 * Update the package index from sources:
+    
+        sudo yum update
+        
 * Install Cassandra using YUM. A new Linux user cassandra will get created as part of the installation. The Cassandra service will also be run as this user.
+        
+        sudo yum install Cassandra
+    
 * Start the Cassandra service.
+    
+        sudo service cassandra start
+        
 * Monitor the progress of the startup 
 * Check the status of Cassandra.The status column in the output should report UN which stands for “Up/Normal”.
+        
+        nodetool status
 
 ## **Step 3: Create and load a workload using YCSB.**
 
