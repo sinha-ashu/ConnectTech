@@ -157,6 +157,39 @@ We followed following steps for corresponding database setups,
         
         sudo chown -R hadoop:hadoop /hadoop
 
+* In following configuration files, Add the following properties in between the <configuration> and </configuration> tags.
+    * Open hdfs-site.xml and 
+    
+            sudo vim /usr/local/hadoop/etc/hadoop/hdfs-site.xml
+
+    * add following properties,
+           
+            <property>
+              <name>dfs.replication</name>
+              <value>1</value>
+           </property>
+
+           <property>
+              <name>dfs.name.dir</name>
+              <value>file:///hadoop/hdfs/namenode</value>
+           </property>
+
+           <property>
+              <name>dfs.data.dir</name>
+              <value>file:///hadoop/hdfs/datanode</value>
+           </property>
+
+    * Open mapred-site.xml and 
+    
+            sudo vim /usr/local/hadoop/etc/hadoop/mapred-site.xml
+
+    * add following properties,
+           
+            <property>
+                <name>mapreduce.framework.name</name>
+                 <value>yarn</value>
+            </property>
+
 
 * Downloading and installing HBase 2.2.5 in Standalone mode.
 * Edit configuration file hbase-site.xml for operating it in single mode.
