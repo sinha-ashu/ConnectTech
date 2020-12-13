@@ -241,11 +241,40 @@ We followed following steps for corresponding database setups,
             
             export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
             
-            
+
+* Install HBase in Standalone Mode:
+
+        sudo mkdir -p /hadoop/HBase/HFiles
+        
+        sudo mkdir -p /hadoop/zookeeper
+        
+        sudo chown -R hadoop:hadoop /hadoop/
+
 
 * Edit configuration file hbase-site.xml for operating it in single mode.
+
+    * sudo vim /usr/local/HBase/conf/hbase-site.xml
+    
+    * Add following property,
+    
+    
+            <property>
+              <name>hbase.rootdir</name>
+              <value>file:/hadoop/HBase/HFiles</value>
+           </property>
+
+           <property>
+              <name>hbase.zookeeper.property.dataDir</name>
+              <value>/hadoop/zookeeper</value>
+           </property>
+
 * Start dfs, yarn and hbase to check the status.
 
+        sudo su - hadoop
+
+        start-all.sh
+        
+        start-hbase.sh
 
 #### MongoDB Install and Setup:
 
