@@ -136,6 +136,19 @@ We followed following steps for corresponding database setups,
 * Set JAVA_HOME - Line 54 as below 
 
         export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+        
+
+* In following configuration file, Add the following properties in between the <configuration> and </configuration> tags.
+    * Open core-site.xml, and add following property
+    
+            sudo vim /usr/local/hadoop/etc/hadoop/core-site.xml
+
+        <property>
+          <name>fs.default.name</name>
+          <value>hdfs://localhost:9000</value>
+          <description>The default file system URI</description>
+       </property>
+       
 
 * Downloading and installing HBase 2.2.5 in Standalone mode.
 * Edit configuration file hbase-site.xml for operating it in single mode.
