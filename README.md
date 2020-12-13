@@ -139,16 +139,24 @@ We followed following steps for corresponding database setups,
         
 
 * In following configuration file, Add the following properties in between the <configuration> and </configuration> tags.
-    * Open core-site.xml, and add following property
+    * Open core-site.xml, and 
     
             sudo vim /usr/local/hadoop/etc/hadoop/core-site.xml
 
-        <property>
-          <name>fs.default.name</name>
-          <value>hdfs://localhost:9000</value>
-          <description>The default file system URI</description>
-       </property>
-       
+    * add following property
+           
+           <property>
+              <name>fs.default.name</name>
+              <value>hdfs://localhost:9000</value>
+              <description>The default file system URI</description>
+           </property>
+ 
+ * Create directories for namenode and datanode and Set ownership to hadoop user and group.
+ 
+        sudo mkdir -p /hadoop/hdfs/{namenode,datanode}
+        
+        sudo chown -R hadoop:hadoop /hadoop
+
 
 * Downloading and installing HBase 2.2.5 in Standalone mode.
 * Edit configuration file hbase-site.xml for operating it in single mode.
