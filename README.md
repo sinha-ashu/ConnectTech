@@ -74,8 +74,22 @@ We followed following steps for corresponding database setups,
         export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
         export PATH=\$PATH:\$JAVA_HOME/bin
         EOF
+        
+        source /etc/profile.d/hadoop_java.sh
 
-* Creating a separate user Hadoop  and adding this user’s key to the list of authorized ssh keys for doing all tasks related to Hadoop and HBase.
+* Creating a separate user Hadoop and generate ssh keys for this user doing all tasks related to Hadoop and HBase.
+
+        sudo adduser hadoop
+        
+        sudo usermod -aG sudo hadoop
+        
+        sudo su - hadoop
+        
+        ssh-keygen -t rsa
+        
+  
+        
+
 * Downloading and installing the Hadoop 3.2.1.
 * Configuring Hadoop while adding properties to following files core-site.xml, hdfs-site.xml, mapred-site.xml and yarn-site.xml  and validate the configuration by * starting and stopping dfs and yarn.
 * Downloading and installing HBase 2.2.5 in Standalone mode.
