@@ -1,4 +1,5 @@
 # ConnectTech
+
 This project contains the performance analysis of three popular NoSQL databases (Cassandra, MongoDB and HBase) using YCSB Benchmark Testing.
 
 NoSQL databases have been extensively used on cloud systems due to their schema-free data architecture, horizontal scalability, and ability to handle large volumes of data. Large amounts of data require systems that are capable of not only to retrieve information in a very small-time frame but also to scale at the same pace as data increases. The increased popularity of data analytics, data mining, along with machine learning has guided the creation of a wide variety of NoSQL databases. One of several key advantages of NoSQL databases is the horizontal scalability, i.e. the capacity to scale efficiency as the number of machines connected to the current cluster increases. This capability potentially wastes resources due to over-provisioning. It is also necessary to be able to define the correct number of nodes needed for a given workload.
@@ -20,7 +21,7 @@ Each instance type includes one or more instance sizes, allowing you to scale yo
 
 We have performed experiments on General Purpose i.e. t2 instances, and Table 1 shows the instance types used for this implementation.
 
-![Alt text](https://github.com/sinha-ashu/ConnectTech/blob/main/data/InstanceTypes.png?raw=true)
+![Alt text](https://github.com/sinha-ashu/TechConnect/blob/main/data/InstanceTypes.png?raw=true)
 
 
 ## **Step1: Creating and Deploying Amazon EC2 Linux instances**
@@ -88,19 +89,19 @@ We followed following steps for corresponding database setups,
 * Importing the public key used by the package management system.
         
         wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
-        
 * Creating a list file for MongoDB.
         
         echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
-        
 * Reloading and updating the local package database.
-  sudo apt-get update
+        
+        sudo apt-get update
 * Downloading and installing the latest stable version of MongoDB.
-  sudo apt-get install -y mongodb-org
+        
+        sudo apt-get install -y mongodb-org
 * Start the MongoDB process and check if it works by not giving any error message. 
-  sudo systemctl start mongod
-  sudo systemctl status mongod
-
+        
+        sudo systemctl start mongod
+        sudo systemctl status mongod    
 #### Cassandra Install and Setup:
 
 * Deploy the instance with the operating system as Ubuntu 18.04 LTS and update all the packages.
@@ -136,9 +137,19 @@ Run below command to load the workload,
 
 * Download and setup MongoDB 18.04 version.
 * Download and install Java and Maven.
+        
+        sudo apt-get install maven
 * Download Python version 2.7 or below because YCSB doesn’t work with Python version 3.0 or above.
+        
+        sudo apt-get install python
 * If not logged in as root user, switch to root user before installing YCSB.
+        
+        sudo su -
 * Install and set up the YCSB benchmarking tool.
+        
+        curl -O --location https://github.com/brianfrankcooper/YCSB/releases/download/0.5.0/ycsb-0.5.0.tar.gz
+        tar xfvz ycsb-0.5.0.tar.gz
+        cd ycsb-0.5.0
 
 
 #### Benchmarking Cassandra with YCSB:
