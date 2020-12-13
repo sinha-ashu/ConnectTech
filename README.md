@@ -136,8 +136,84 @@ We followed following steps for corresponding database setups,
 * Set JAVA_HOME - Line 54 as below 
 
         export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+        
+
+* In following configuration file, Add the following properties in between the <configuration> and </configuration> tags.
+    * Open core-site.xml, and 
+    
+            sudo vim /usr/local/hadoop/etc/hadoop/core-site.xml
+
+    * add following property
+           
+           <property>
+              <name>fs.default.name</name>
+              <value>hdfs://localhost:9000</value>
+              <description>The default file system URI</description>
+           </property>
+ 
+ * Create directories for namenode and datanode and Set ownership to hadoop user and group.
+ 
+        sudo mkdir -p /hadoop/hdfs/{namenode,datanode}
+        
+        sudo chown -R hadoop:hadoop /hadoop
+
+* In following configuration files, Add the following properties in between the <configuration> and </configuration> tags.
+    * Open hdfs-site.xml and 
+    
+            sudo vim /usr/local/hadoop/etc/hadoop/hdfs-site.xml
+
+    * add following properties,
+           
+            <property>
+              <name>dfs.replication</name>
+              <value>1</value>
+           </property>
+
+           <property>
+              <name>dfs.name.dir</name>
+              <value>file:///hadoop/hdfs/namenode</value>
+           </property>
+
+           <property>
+              <name>dfs.data.dir</name>
+              <value>file:///hadoop/hdfs/datanode</value>
+           </property>
+
+    * Open mapred-site.xml and 
+    
+            sudo vim /usr/local/hadoop/etc/hadoop/mapred-site.xml
+
+    * add following properties,
+           
+            <property>
+                <name>mapreduce.framework.name</name>
+                 <value>yarn</value>
+            </property>
+     
+    * Open yarn-site.xm and 
+    
+            sudo vim /usr/local/hadoop/etc/hadoop/yarn-site.xml
+
+    * add following properties,
+           
+            <property>
+          <name>yarn.nodemanager.aux-services</name>
+          <value>mapreduce_shuffle</value>
+            </property>
+
 
 * Downloading and installing HBase 2.2.5 in Standalone mode.
+
+        VER="2.2.5"
+        
+        wget http://apache.mirror.gtcomm.net/hbase/stable/hbase-$VER-bin.tar.gz --no-check-certificate
+        
+        tar xvf hbase-$VER-bin.tar.gz
+        
+        sudo mv hbase-$VER/ /usr/local/HBase/
+        
+
+
 * Edit configuration file hbase-site.xml for operating it in single mode.
 * Start dfs, yarn and hbase to check the status.
 
@@ -166,12 +242,41 @@ We followed following steps for corresponding database setups,
 
 * Deploy the instance with the operating system as Ubuntu 18.04 LTS and update all the packages.
 * Download and Install Java.
-* Create a new file and add the Apache repository of Cassandra to the file /etc/yum.repos.d/cassandra.repo (as the root user).
+        
+        sudo yum install java-1.8.0-openjdk-devel
+
+* Create a new file and add the Apache repository of Cassandra to the file /etc/yum.repos.d/cassandra.repo (as the root user). 
+
+        sudo su
+        touch /etc/yum.repos.d/cassandra.repo
+        cd /etc/yum.repos.d/
+        vim cassandra.repo
+        
+        File Content : 
+        
+        [cassandra]
+        name=Apache Cassandra
+        baseurl=https://downloads.apache.org/cassandra/redhat/40x/
+        gpgcheck=1
+        repo_gpgcheck=1
+        gpgkey=https://downloads.apache.org/cassandra/KEYS
+
 * Update the package index from sources:
+    
+        sudo yum update
+        
 * Install Cassandra using YUM. A new Linux user cassandra will get created as part of the installation. The Cassandra service will also be run as this user.
+        
+        sudo yum install Cassandra
+    
 * Start the Cassandra service.
+    
+        sudo service cassandra start
+        
 * Monitor the progress of the startup 
 * Check the status of Cassandra.The status column in the output should report UN which stands for “Up/Normal”.
+        
+        nodetool status
 
 ## **Step 3: Create and load a workload using YCSB.**
 
