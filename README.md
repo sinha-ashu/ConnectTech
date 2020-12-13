@@ -88,9 +88,27 @@ We followed following steps for corresponding database setups,
         ssh-keygen -t rsa
         
   
+ * Add this user’s key to list of Authorized ssh keys.
+
+        cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
         
+        chmod 0600 ~/.ssh/authorized_keys
+
 
 * Downloading and installing the Hadoop 3.2.1.
+
+        RELEASE="3.2.1"
+        
+        wget https://www-eu.apache.org/dist/hadoop/common/hadoop-$RELEASE/hadoop-$RELEASE.tar.gz
+        
+        tar -xzvf hadoop-$RELEASE.tar.gz
+        
+        rm hadoop-$RELEASE.tar.gz
+        
+        sudo mv hadoop-$RELEASE/ /usr/local/hadoop
+        
+        
+
 * Configuring Hadoop while adding properties to following files core-site.xml, hdfs-site.xml, mapred-site.xml and yarn-site.xml  and validate the configuration by * starting and stopping dfs and yarn.
 * Downloading and installing HBase 2.2.5 in Standalone mode.
 * Edit configuration file hbase-site.xml for operating it in single mode.
