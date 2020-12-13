@@ -212,7 +212,36 @@ We followed following steps for corresponding database setups,
         
         sudo mv hbase-$VER/ /usr/local/HBase/
         
+ * Add following lines to the existing file.
+ 
+        * sudo vim /etc/profile.d/hadoop_java.sh
+ 
+        export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+        export PATH=$PATH:$JAVA_HOME/bin
+        export HADOOP_HOME=/usr/local/hadoop
+        export HADOOP_HDFS_HOME=$HADOOP_HOME
+        export HADOOP_MAPRED_HOME=$HADOOP_HOME
+        export YARN_HOME=$HADOOP_HOME
+        export HADOOP_COMMON_HOME=$HADOOP_HOME
+        export HBASE_HOME=/usr/local/HBase
+        export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+        export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HBASE_HOME/bin
 
+
+    * set PATH variable 
+        
+          source /etc/profile.d/hadoop_java.sh
+            
+            
+* Edit JAVA_HOME in shell script hbase-env.sh:
+
+            sudo vim /usr/local/HBase/conf/hbase-env.sh
+
+    * Set JAVA_HOME - Line 28
+            
+            export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+            
+            
 
 * Edit configuration file hbase-site.xml for operating it in single mode.
 * Start dfs, yarn and hbase to check the status.
