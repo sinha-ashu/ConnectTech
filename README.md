@@ -20,7 +20,7 @@ Each instance type includes one or more instance sizes, allowing you to scale yo
 
 We have performed experiments on General Purpose i.e. t2 instances, and Table 1 shows the instance types used for this implementation.
 
-![Alt text](https://github.com/sinha-ashu/TechConnect/blob/main/data/InstanceTypes.png?raw=true)
+![Alt text](https://github.com/sinha-ashu/ConnectTech/blob/main/data/InstanceTypes.png?raw=true)
 
 
 ## **Step1: Creating and Deploying Amazon EC2 Linux instances**
