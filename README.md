@@ -189,9 +189,31 @@ We followed following steps for corresponding database setups,
                 <name>mapreduce.framework.name</name>
                  <value>yarn</value>
             </property>
+     
+    * Open yarn-site.xm and 
+    
+            sudo vim /usr/local/hadoop/etc/hadoop/yarn-site.xml
+
+    * add following properties,
+           
+            <property>
+          <name>yarn.nodemanager.aux-services</name>
+          <value>mapreduce_shuffle</value>
+            </property>
 
 
 * Downloading and installing HBase 2.2.5 in Standalone mode.
+
+        VER="2.2.5"
+        
+        wget http://apache.mirror.gtcomm.net/hbase/stable/hbase-$VER-bin.tar.gz --no-check-certificate
+        
+        tar xvf hbase-$VER-bin.tar.gz
+        
+        sudo mv hbase-$VER/ /usr/local/HBase/
+        
+
+
 * Edit configuration file hbase-site.xml for operating it in single mode.
 * Start dfs, yarn and hbase to check the status.
 
